@@ -86,7 +86,8 @@ class _Prototype extends StatelessWidget {
   const _Prototype({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const Text('Lorem ipsum dolor sit amet');
+  Widget build(BuildContext context) =>
+      const Text('Lorem ipsum dolor sit amet');
 }
 
 class _Prototype2 extends StatelessWidget {

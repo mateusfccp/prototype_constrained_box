@@ -1,39 +1,33 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# prototype_constrained_box
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+[![Version](https://img.shields.io/pub/v/prototype_constrained_box)](https://pub.dev/packages/prototype_constrained_box)
+[![License](https://img.shields.io/github/license/mateusfccp/prototype_constrained_box)](https://opensource.org/licenses/MIT)
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* Just like [`ConstrainedBox`](https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html), you can constrain the `child` of this widget;
+* However, instead of passing directly a [`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html), you pass another `prototype` widget that will be used as constraint;
+* You may constrain the `child` loosely or tightly, in one or both of the axes.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add `prototype_constrained_box` as a dependency in your `pubspec.yaml`:
+
+ ```yaml
+ dependencies:
+    prototype_constrained_box: ^0.0.1
+ ```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Use the `PrototypeConstrainedBox` widget by providing a `prototype` and a `child`.
 
+The following example will render a `ColoredBox` that will fill the space that the given `prototype` text would occupy:
 ```dart
-const like = 'sample';
+const PrototypeConstrainedBox.tight(
+  prototype: Text('Lorem ipsum dolor'),
+  child: ColoredBox(color: Color(0xFFFF0000)),
+);
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+For more information regarding the `PrototypeConstrainedBox` API, refer to [the documentation](https://pub.dev/documentation/prototype_constrained_box/latest/prototype_constrained_box/PrototypeConstrainedBox-class.html).

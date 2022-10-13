@@ -5,7 +5,23 @@ import 'element.dart';
 import 'prototype_constraint_type.dart';
 import 'rendering.dart';
 
+/// A widget that imposes additional constraints on its child, based on a [prototype].
+///
+/// For example, if you wanted [child] to be constrained to the exact size of a text,
+/// you could do:
+///
+/// ```dart
+/// PrototypeConstrainedBox.tight(
+///   prototype: Text('Lorem ipsum dolor'),
+///   child: ColoredBox(color: Color(0xFFFF0000)),
+/// );
+/// ```
+///
+/// See also:
+///
+///  * [ConstrainedBox](https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html), the equivalent class that receives a [BoxConstraints](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html) instead of a [prototype].
 class PrototypeConstrainedBox extends RenderObjectWidget {
+  /// Constrains the given [child] to have the exact same size as [prototype].
   const PrototypeConstrainedBox.tight({
     super.key,
     required this.prototype,
@@ -13,6 +29,7 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   })  : _horizontalConstraint = PrototypeConstraintType.tight,
         _verticalConstraint = PrototypeConstraintType.tight;
 
+  /// Constrains the given [child] to have the exact same width as [prototype].
   const PrototypeConstrainedBox.tightHorizontal({
     super.key,
     required this.prototype,
@@ -20,6 +37,7 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   })  : _horizontalConstraint = PrototypeConstraintType.tight,
         _verticalConstraint = PrototypeConstraintType.unconstrained;
 
+  /// Constrains the given [child] to have the exact same height as [prototype].
   const PrototypeConstrainedBox.tightVertical({
     super.key,
     required this.prototype,
@@ -27,6 +45,7 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   })  : _horizontalConstraint = PrototypeConstraintType.unconstrained,
         _verticalConstraint = PrototypeConstraintType.tight;
 
+  /// Constrains the given [child] to forbid it to be larger than [prototype].
   const PrototypeConstrainedBox.loose({
     super.key,
     required this.prototype,
@@ -34,6 +53,7 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   })  : _horizontalConstraint = PrototypeConstraintType.loose,
         _verticalConstraint = PrototypeConstraintType.loose;
 
+  /// Constrains the given [child] to forbid it to be wider than [prototype].
   const PrototypeConstrainedBox.looseHorizontal({
     super.key,
     required this.prototype,
@@ -41,6 +61,7 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   })  : _horizontalConstraint = PrototypeConstraintType.loose,
         _verticalConstraint = PrototypeConstraintType.unconstrained;
 
+  /// Constrains the given [child] to forbid it to be taller than [prototype].
   const PrototypeConstrainedBox.looseVertical({
     super.key,
     required this.prototype,
@@ -48,7 +69,13 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   })  : _horizontalConstraint = PrototypeConstraintType.unconstrained,
         _verticalConstraint = PrototypeConstraintType.loose;
 
+  /// The widget whose constraints are going to be imposed in [child].
+  ///
+  /// This widget pass through the layout phase, as it needs to be laid out for we to know it's constraints.
+  /// However, it does not pass through the paint phase, and is, thus, not visible in any way.
   final Widget prototype;
+
+  /// The widget below this widget in the tree.
   final Widget? child;
 
   final PrototypeConstraintType _horizontalConstraint;
@@ -63,7 +90,8 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderPrototypeConstrainedBox renderObject) {
+  void updateRenderObject(
+      BuildContext context, RenderPrototypeConstrainedBox renderObject) {
     renderObject.horizontalConstraint = _horizontalConstraint;
     renderObject.verticalConstraint = _verticalConstraint;
   }
@@ -73,8 +101,10 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Widget>('prototype', prototype));
     properties.add(DiagnosticsProperty<Widget>('child', child));
-    properties.add(DiagnosticsProperty<PrototypeConstraintType>('horizontal constraint', _horizontalConstraint));
-    properties.add(DiagnosticsProperty<PrototypeConstraintType>('vertical constraint', _verticalConstraint));
+    properties.add(DiagnosticsProperty<PrototypeConstraintType>(
+        'horizontal constraint', _horizontalConstraint));
+    properties.add(DiagnosticsProperty<PrototypeConstraintType>(
+        'vertical constraint', _verticalConstraint));
   }
 
   @override
