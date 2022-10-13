@@ -1,7 +1,8 @@
 name: prototype_constrained_box
-description: A new Flutter package project.
+description: A ConstrainedBox-like widget, but the constraints are given by another widget.
 version: 0.0.1
-homepage:
+repository: https://github.com/mateusfccp/prototype_constrained_box
+issue_tracker: https://github.com/mateusfccp/prototype_constrained_box/issues
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
