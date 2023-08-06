@@ -27,13 +27,6 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: PrototypeConstrainedBox.loose(
-        prototype: SizedBox.square(dimension: 64.0),
-        child: Placeholder(),
-      ),
-    );
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('PrototypeConstrainedBox'),
@@ -70,9 +63,9 @@ class Main extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Column(
-              children: const [
+              children: [
                 _TextPrototype(),
                 PrototypeConstrainedBox.tight(
                   prototype: _TextPrototype(),
