@@ -1,3 +1,8 @@
+## 1.0.0
+
+* Added tests
+* Improved example
+
 ## 0.0.1+1
 
 * Updated documentation

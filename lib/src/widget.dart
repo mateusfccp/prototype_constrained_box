@@ -7,8 +7,8 @@ import 'rendering.dart';
 
 /// A widget that imposes additional constraints on its child, based on a [prototype].
 ///
-/// For example, if you want a widget to be constrained to the exact size of a text,
-/// you can do:
+/// For example, if you wanted [child] to be constrained to the exact size of a text,
+/// you could do:
 ///
 /// ```dart
 /// PrototypeConstrainedBox.tight(
