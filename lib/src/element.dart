@@ -65,8 +65,7 @@ class PrototypeConstrainedBoxElement extends RenderObjectElement {
   }
 
   @override
-  void moveRenderObjectChild(
-      RenderObject child, Object? oldSlot, Object? newSlot) {
+  void moveRenderObjectChild(RenderObject child, Object? oldSlot, Object? newSlot) {
     assert(false);
   }
 

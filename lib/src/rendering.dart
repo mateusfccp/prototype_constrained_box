@@ -2,8 +2,7 @@ import 'package:flutter/rendering.dart';
 
 import 'constraint_type.dart';
 
-class RenderPrototypeConstrainedBox extends RenderBox
-    with RenderObjectWithChildMixin<RenderBox>, RenderProxyBoxMixin<RenderBox> {
+class RenderPrototypeConstrainedBox extends RenderBox with RenderObjectWithChildMixin<RenderBox>, RenderProxyBoxMixin<RenderBox> {
   RenderPrototypeConstrainedBox(
     this._horizontalConstraint,
     this._verticalConstraint,
