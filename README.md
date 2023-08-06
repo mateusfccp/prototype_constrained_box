@@ -15,7 +15,7 @@ Add `prototype_constrained_box` as a dependency in your `pubspec.yaml`:
 
  ```yaml
  dependencies:
-    prototype_constrained_box: ^0.0.1
+    prototype_constrained_box: ^1.0.0
  ```
 
 ## Usage
