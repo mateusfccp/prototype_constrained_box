@@ -1,6 +1,6 @@
 import 'package:flutter/rendering.dart';
 
-import 'prototype_constraint_type.dart';
+import 'constraint_type.dart';
 
 class RenderPrototypeConstrainedBox extends RenderBox
     with RenderObjectWithChildMixin<RenderBox>, RenderProxyBoxMixin<RenderBox> {
@@ -9,22 +9,22 @@ class RenderPrototypeConstrainedBox extends RenderBox
     this._verticalConstraint,
   );
 
-  PrototypeConstraintType _horizontalConstraint;
+  ConstraintType _horizontalConstraint;
 
-  PrototypeConstraintType get horizontalConstraint => _horizontalConstraint;
+  ConstraintType get horizontalConstraint => _horizontalConstraint;
 
-  set horizontalConstraint(PrototypeConstraintType value) {
+  set horizontalConstraint(ConstraintType value) {
     if (_horizontalConstraint != value) {
       _horizontalConstraint = value;
       markNeedsLayout();
     }
   }
 
-  PrototypeConstraintType _verticalConstraint;
+  ConstraintType _verticalConstraint;
 
-  PrototypeConstraintType get verticalConstraint => _verticalConstraint;
+  ConstraintType get verticalConstraint => _verticalConstraint;
 
-  set verticalConstraint(PrototypeConstraintType value) {
+  set verticalConstraint(ConstraintType value) {
     if (_verticalConstraint != value) {
       _verticalConstraint = value;
       markNeedsLayout();
@@ -141,7 +141,10 @@ class RenderPrototypeConstrainedBox extends RenderBox
     final constraints = _constraints!;
 
     if (child != null) {
-      child.layout(constraints.enforce(this.constraints), parentUsesSize: true);
+      child.layout(
+        constraints.enforce(this.constraints),
+        parentUsesSize: true,
+      );
       size = child.size;
     } else {
       size = _constraints!.enforce(constraints).constrain(Size.zero);
@@ -153,7 +156,9 @@ class RenderPrototypeConstrainedBox extends RenderBox
     final child = this.child;
 
     if (child != null) {
-      return child.getDryLayout(_constraints!.enforce(constraints));
+      return child.getDryLayout(
+        _constraints!.enforce(constraints),
+      );
     } else {
       return _constraints!.enforce(constraints).constrain(Size.zero);
     }

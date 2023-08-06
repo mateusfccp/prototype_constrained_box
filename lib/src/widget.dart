@@ -2,13 +2,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'element.dart';
-import 'prototype_constraint_type.dart';
+import 'constraint_type.dart';
 import 'rendering.dart';
 
 /// A widget that imposes additional constraints on its child, based on a [prototype].
 ///
-/// For example, if you wanted [child] to be constrained to the exact size of a text,
-/// you could do:
+/// For example, if you want a widget to be constrained to the exact size of a text,
+/// you can do:
 ///
 /// ```dart
 /// PrototypeConstrainedBox.tight(
@@ -26,48 +26,48 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
     super.key,
     required this.prototype,
     required this.child,
-  })  : _horizontalConstraint = PrototypeConstraintType.tight,
-        _verticalConstraint = PrototypeConstraintType.tight;
+  })  : _horizontalConstraint = ConstraintType.tight,
+        _verticalConstraint = ConstraintType.tight;
 
   /// Constrains the given [child] to have the exact same width as [prototype].
   const PrototypeConstrainedBox.tightHorizontal({
     super.key,
     required this.prototype,
     required this.child,
-  })  : _horizontalConstraint = PrototypeConstraintType.tight,
-        _verticalConstraint = PrototypeConstraintType.unconstrained;
+  })  : _horizontalConstraint = ConstraintType.tight,
+        _verticalConstraint = ConstraintType.unconstrained;
 
   /// Constrains the given [child] to have the exact same height as [prototype].
   const PrototypeConstrainedBox.tightVertical({
     super.key,
     required this.prototype,
     required this.child,
-  })  : _horizontalConstraint = PrototypeConstraintType.unconstrained,
-        _verticalConstraint = PrototypeConstraintType.tight;
+  })  : _horizontalConstraint = ConstraintType.unconstrained,
+        _verticalConstraint = ConstraintType.tight;
 
   /// Constrains the given [child] to forbid it to be larger than [prototype].
   const PrototypeConstrainedBox.loose({
     super.key,
     required this.prototype,
     required this.child,
-  })  : _horizontalConstraint = PrototypeConstraintType.loose,
-        _verticalConstraint = PrototypeConstraintType.loose;
+  })  : _horizontalConstraint = ConstraintType.loose,
+        _verticalConstraint = ConstraintType.loose;
 
   /// Constrains the given [child] to forbid it to be wider than [prototype].
   const PrototypeConstrainedBox.looseHorizontal({
     super.key,
     required this.prototype,
     required this.child,
-  })  : _horizontalConstraint = PrototypeConstraintType.loose,
-        _verticalConstraint = PrototypeConstraintType.unconstrained;
+  })  : _horizontalConstraint = ConstraintType.loose,
+        _verticalConstraint = ConstraintType.unconstrained;
 
   /// Constrains the given [child] to forbid it to be taller than [prototype].
   const PrototypeConstrainedBox.looseVertical({
     super.key,
     required this.prototype,
     required this.child,
-  })  : _horizontalConstraint = PrototypeConstraintType.unconstrained,
-        _verticalConstraint = PrototypeConstraintType.loose;
+  })  : _horizontalConstraint = ConstraintType.unconstrained,
+        _verticalConstraint = ConstraintType.loose;
 
   /// The widget whose constraints are going to be imposed in [child].
   ///
@@ -78,8 +78,8 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   /// The widget below this widget in the tree.
   final Widget? child;
 
-  final PrototypeConstraintType _horizontalConstraint;
-  final PrototypeConstraintType _verticalConstraint;
+  final ConstraintType _horizontalConstraint;
+  final ConstraintType _verticalConstraint;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -90,8 +90,7 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderPrototypeConstrainedBox renderObject) {
+  void updateRenderObject(BuildContext context, RenderPrototypeConstrainedBox renderObject) {
     renderObject.horizontalConstraint = _horizontalConstraint;
     renderObject.verticalConstraint = _verticalConstraint;
   }
@@ -101,10 +100,12 @@ class PrototypeConstrainedBox extends RenderObjectWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Widget>('prototype', prototype));
     properties.add(DiagnosticsProperty<Widget>('child', child));
-    properties.add(DiagnosticsProperty<PrototypeConstraintType>(
-        'horizontal constraint', _horizontalConstraint));
-    properties.add(DiagnosticsProperty<PrototypeConstraintType>(
-        'vertical constraint', _verticalConstraint));
+    properties.add(
+      DiagnosticsProperty<ConstraintType>('horizontal constraint', _horizontalConstraint),
+    );
+    properties.add(
+      DiagnosticsProperty<ConstraintType>('vertical constraint', _verticalConstraint),
+    );
   }
 
   @override

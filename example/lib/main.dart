@@ -27,7 +27,12 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const prototype = _Prototype2();
+    return const Center(
+      child: PrototypeConstrainedBox.loose(
+        prototype: SizedBox.square(dimension: 64.0),
+        child: Placeholder(),
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +45,7 @@ class Main extends StatelessWidget {
               slivers: [
                 SliverToBoxAdapter(
                   child: PrototypeConstrainedBox.tight(
-                    prototype: prototype,
+                    prototype: const _SizedBoxPrototype(),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
@@ -68,9 +73,9 @@ class Main extends StatelessWidget {
           Expanded(
             child: Column(
               children: const [
-                _Prototype(),
+                _TextPrototype(),
                 PrototypeConstrainedBox.tight(
-                  prototype: _Prototype(),
+                  prototype: _TextPrototype(),
                   child: Placeholder(),
                 ),
               ],
@@ -82,16 +87,15 @@ class Main extends StatelessWidget {
   }
 }
 
-class _Prototype extends StatelessWidget {
-  const _Prototype({Key? key}) : super(key: key);
+class _TextPrototype extends StatelessWidget {
+  const _TextPrototype({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      const Text('Lorem ipsum dolor sit amet');
+  Widget build(BuildContext context) => const Text('Lorem ipsum dolor sit amet');
 }
 
-class _Prototype2 extends StatelessWidget {
-  const _Prototype2({Key? key}) : super(key: key);
+class _SizedBoxPrototype extends StatelessWidget {
+  const _SizedBoxPrototype({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => const SizedBox.square(dimension: 64.0);
