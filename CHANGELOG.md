@@ -1,6 +1,9 @@
+## 2.0.0+1
+
+* Improved documentation
+
 ## 2.0.0
 
-* **BREAKING:** `RenderPrototypeConstrainedBox` is now private
 * **BREAKING:** `PrototypeConstrainedBoxElement` is now private
 * **BREAKING:** `ConstraintType` has been removed from the API
 * **BREAKING:** `PrototypeConstrainedBox` is now a `final class`, and thus can't be extended/implemented anymore
@@ -9,6 +12,7 @@
   * `PrototypeConstrainedBox.tightHorizontal` and `PrototypeConstrainedBox.tightVertical` have been replaced by `PrototypeConstrainedBox.tightFor`
   * `PrototypeConstrainedBox` default unnamed constructor allows for complete customization of constraints, allowing constraints that were not possible before
 * **Fix:** `RenderPrototypeConstrainedBox` was not calling `super` on `redepthChildren`
+* Now, instead of laying out `prototype`, we compute it's constraints by using `getDryLayout`
 
 ## 1.0.0
 

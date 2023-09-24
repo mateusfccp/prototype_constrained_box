@@ -7,9 +7,11 @@ import 'package:flutter/widgets.dart';
 /// you could do:
 ///
 /// ```dart
-/// PrototypeConstrainedBox.tight(
+/// const PrototypeConstrainedBox.tight(
 ///   prototype: Text('Lorem ipsum dolor'),
-///   child: ColoredBox(color: Color(0xFFFF0000)),
+///   child: ColoredBox(
+///     color: Color(0xFFFF0000),
+///   ),
 /// );
 /// ```
 ///
