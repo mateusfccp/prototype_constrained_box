@@ -60,12 +60,12 @@ final class PrototypeConstrainedBox extends RenderObjectWidget {
   /// to specify the constraint type for each axis independently.
   const PrototypeConstrainedBox({
     super.key,
-    required this.constrainMinWidth,
-    required this.constrainMaxWidth,
-    required this.constrainMinHeight,
-    required this.constrainMaxHeight,
     required this.prototype,
     required this.child,
+    this.constrainMinWidth = false,
+    this.constrainMaxWidth = false,
+    this.constrainMinHeight = false,
+    this.constrainMaxHeight = false,
   });
 
   /// The widget whose constraints are going to be imposed in [child].

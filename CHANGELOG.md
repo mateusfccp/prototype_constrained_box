@@ -1,3 +1,8 @@
+## 2.0.1
+
+* `PrototypeConstrainedBox` unnamed constructor now has default values for `constrain*` parameters
+  * All `constrain` parameters default to `false`
+
 ## 2.0.0+1
 
 * Improved documentation
