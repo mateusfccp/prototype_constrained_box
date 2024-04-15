@@ -1,3 +1,7 @@
+## 2.0.2
+
+* Fix exception when trying to read debug properties in Flutter Inspector (#1)
+
 ## 2.0.1
 
 * `PrototypeConstrainedBox` unnamed constructor now has default values for `constrain*` parameters
