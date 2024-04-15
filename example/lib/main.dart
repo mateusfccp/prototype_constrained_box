@@ -7,7 +7,7 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+final class App extends StatelessWidget {
   const App({super.key});
 
   @override
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
   }
 }
 
-class Main extends StatelessWidget {
+final class Main extends StatelessWidget {
   const Main({super.key});
 
   @override
@@ -80,15 +80,15 @@ class Main extends StatelessWidget {
   }
 }
 
-class _TextPrototype extends StatelessWidget {
-  const _TextPrototype({Key? key}) : super(key: key);
+final class _TextPrototype extends StatelessWidget {
+  const _TextPrototype();
 
   @override
   Widget build(BuildContext context) => const Text('Lorem ipsum dolor sit amet');
 }
 
-class _SizedBoxPrototype extends StatelessWidget {
-  const _SizedBoxPrototype({Key? key}) : super(key: key);
+final class _SizedBoxPrototype extends StatelessWidget {
+  const _SizedBoxPrototype();
 
   @override
   Widget build(BuildContext context) => const SizedBox.square(dimension: 64.0);
