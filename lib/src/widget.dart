@@ -112,10 +112,10 @@ final class PrototypeConstrainedBox extends RenderObjectWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Widget>('prototype', prototype));
     properties.add(DiagnosticsProperty<Widget>('child', child));
-    properties.add(FlagProperty('constrainMinWidth', value: constrainMinWidth));
-    properties.add(FlagProperty('constrainMaxWidth', value: constrainMaxWidth));
-    properties.add(FlagProperty('constrainMinHeight', value: constrainMinHeight));
-    properties.add(FlagProperty('constrainMaxHeight', value: constrainMaxHeight));
+    properties.add(DiagnosticsProperty<bool>('constrainMinWidth', constrainMinWidth));
+    properties.add(DiagnosticsProperty<bool>('constrainMaxWidth', constrainMaxWidth));
+    properties.add(DiagnosticsProperty<bool>('constrainMinHeight', constrainMinHeight));
+    properties.add(DiagnosticsProperty<bool>('constrainMaxHeight', constrainMaxHeight));
   }
 }
 
