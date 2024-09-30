@@ -326,7 +326,11 @@ final class RenderPrototypeConstrainedBox extends RenderProxyBox {
   List<DiagnosticsNode> debugDescribeChildren() {
     return [
       ...super.debugDescribeChildren(),
-      if (prototype case final prototype?) prototype.toDiagnosticsNode(name: 'prototype'),
+      if (prototype case final prototype?)
+        prototype.toDiagnosticsNode(
+          name: 'prototype',
+          style: DiagnosticsTreeStyle.offstage,
+        ),
     ];
   }
 }
