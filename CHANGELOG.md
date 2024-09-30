@@ -1,3 +1,8 @@
+## 2.0.3
+
+* Fix exception when selecting the widget in Flutter Inspector (#3)
+* Dependencies updated
+
 ## 2.0.2
 
 * Fix exception when trying to read debug properties in Flutter Inspector (#1)

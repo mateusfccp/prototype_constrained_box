@@ -1,6 +1,6 @@
 name: prototype_constrained_box
 description: A ConstrainedBox-like widget, but the constraints are given by another widget.
-version: 2.0.2
+version: 2.0.3
 repository: https://github.com/mateusfccp/prototype_constrained_box
 issue_tracker: https://github.com/mateusfccp/prototype_constrained_box/issues
 funding:
