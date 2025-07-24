@@ -5,7 +5,9 @@ import 'package:prototype_constrained_box/prototype_constrained_box.dart';
 void main() {
   group('PrototypeConstrainedBox', () {
     group('.loose', () {
-      testWidgets('should prevent the child from being bigger than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should prevent the child from being bigger than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {
@@ -18,7 +20,9 @@ void main() {
         );
       });
 
-      testWidgets('should allow the child from being smaller than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should allow the child from being smaller than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {
@@ -33,7 +37,9 @@ void main() {
     });
 
     group('.tight', () {
-      testWidgets('should prevent the child from being bigger than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should prevent the child from being bigger than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {
@@ -46,7 +52,9 @@ void main() {
         );
       });
 
-      testWidgets('should prevent the child from being smaller than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should prevent the child from being smaller than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {
@@ -61,7 +69,9 @@ void main() {
     });
 
     group('.tightFor(width: true)', () {
-      testWidgets('should prevent the child from being wider than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should prevent the child from being wider than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {
@@ -75,7 +85,9 @@ void main() {
         );
       });
 
-      testWidgets('should prevent the child from being narrower than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should prevent the child from being narrower than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {
@@ -91,7 +103,9 @@ void main() {
     });
 
     group('.tightFor(height: true)', () {
-      testWidgets('should prevent the child from being taller than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should prevent the child from being taller than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {
@@ -105,7 +119,9 @@ void main() {
         );
       });
 
-      testWidgets('should prevent the child from being shorter than the prototype', (WidgetTester tester) async {
+      testWidgets(
+          'should prevent the child from being shorter than the prototype',
+          (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
           builder: (key) {

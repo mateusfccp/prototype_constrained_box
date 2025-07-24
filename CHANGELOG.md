@@ -1,3 +1,7 @@
+## 2.0.3+1
+
+* Format code and update lint dependencies
+
 ## 2.0.3
 
 * Fix exception when selecting the widget in Flutter Inspector (#3)

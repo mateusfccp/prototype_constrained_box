@@ -97,7 +97,8 @@ final class PrototypeConstrainedBox extends RenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderPrototypeConstrainedBox renderObject) {
+  void updateRenderObject(
+      BuildContext context, RenderPrototypeConstrainedBox renderObject) {
     renderObject.constrainMinWidth = constrainMinWidth;
     renderObject.constrainMaxWidth = constrainMaxWidth;
     renderObject.constrainMinHeight = constrainMinHeight;
@@ -112,10 +113,14 @@ final class PrototypeConstrainedBox extends RenderObjectWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Widget>('prototype', prototype));
     properties.add(DiagnosticsProperty<Widget>('child', child));
-    properties.add(DiagnosticsProperty<bool>('constrainMinWidth', constrainMinWidth));
-    properties.add(DiagnosticsProperty<bool>('constrainMaxWidth', constrainMaxWidth));
-    properties.add(DiagnosticsProperty<bool>('constrainMinHeight', constrainMinHeight));
-    properties.add(DiagnosticsProperty<bool>('constrainMaxHeight', constrainMaxHeight));
+    properties
+        .add(DiagnosticsProperty<bool>('constrainMinWidth', constrainMinWidth));
+    properties
+        .add(DiagnosticsProperty<bool>('constrainMaxWidth', constrainMaxWidth));
+    properties.add(
+        DiagnosticsProperty<bool>('constrainMinHeight', constrainMinHeight));
+    properties.add(
+        DiagnosticsProperty<bool>('constrainMaxHeight', constrainMaxHeight));
   }
 }
 
@@ -397,7 +402,8 @@ final class _PrototypeConstrainedBoxElement extends RenderObjectElement {
   }
 
   @override
-  void moveRenderObjectChild(RenderObject child, Object? oldSlot, Object? newSlot) {
+  void moveRenderObjectChild(
+      RenderObject child, Object? oldSlot, Object? newSlot) {
     assert(false);
   }
 

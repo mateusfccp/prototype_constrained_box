@@ -84,7 +84,9 @@ final class _TextPrototype extends StatelessWidget {
   const _TextPrototype();
 
   @override
-  Widget build(BuildContext context) => const Text('Lorem ipsum dolor sit amet');
+  Widget build(BuildContext context) {
+    return const Text('Lorem ipsum dolor sit amet');
+  }
 }
 
 final class _SizedBoxPrototype extends StatelessWidget {
