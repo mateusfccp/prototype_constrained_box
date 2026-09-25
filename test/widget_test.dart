@@ -34,6 +34,22 @@ void main() {
           expectation: const Size.square(32.0),
         );
       });
+
+      testWidgets(
+          'should not constrain the child when constrain is false',
+          (WidgetTester tester) async {
+        await _testWidget(
+          tester: tester,
+          builder: (key) {
+            return PrototypeConstrainedBox.loose(
+              constrain: false,
+              prototype: const SizedBox.square(dimension: 64.0),
+              child: SizedBox.square(key: key, dimension: 128.0),
+            );
+          },
+          expectation: const Size.square(128.0),
+        );
+      });
     });
 
     group('.tight', () {
@@ -64,6 +80,22 @@ void main() {
             );
           },
           expectation: const Size.square(64.0),
+        );
+      });
+
+      testWidgets(
+          'should not constrain the child when constrain is false',
+          (WidgetTester tester) async {
+        await _testWidget(
+          tester: tester,
+          builder: (key) {
+            return PrototypeConstrainedBox.tight(
+              constrain: false,
+              prototype: const SizedBox.square(dimension: 64.0),
+              child: SizedBox.square(key: key, dimension: 128.0),
+            );
+          },
+          expectation: const Size.square(128.0),
         );
       });
     });

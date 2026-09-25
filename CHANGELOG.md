@@ -1,3 +1,9 @@
+## 2.0.5
+
+* Add `constrain` parameter to `PrototypeConstrainedBox.tight` and `PrototypeConstrainedBox.loose` constructors (defaults to `true`)
+* Skip computing `prototype` dry layout when all `constrain*` parameters are `false`
+* Fix `computeDryLayout` when called before first layout or with different constraints
+
 ## 2.0.4
 
 * Fix null check exception when querying intrinsic dimensions before the first layout

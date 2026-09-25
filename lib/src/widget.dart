@@ -1,12 +1,12 @@
-import 'dart:math';
-
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-/// A widget that imposes additional constraints on its child, based on a [prototype].
+import 'rendering.dart';
+
+/// A widget that imposes additional constraints on its child based on a [prototype].
 ///
-/// For example, if you wanted [child] to be constrained to the exact size of a text,
-/// you could do:
+/// For example, if you wanted [child] to be constrained to the exact size of a
+/// text, you could do:
 ///
 /// ```dart
 /// const PrototypeConstrainedBox.tight(
@@ -22,14 +22,18 @@ import 'package:flutter/widgets.dart';
 ///  * [ConstrainedBox](https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html), the equivalent class that receives a [BoxConstraints](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html) instead of a [prototype].
 final class PrototypeConstrainedBox extends RenderObjectWidget {
   /// Constrains the given [child] to have the exact same size as [prototype].
+  ///
+  /// If [constrain] is `false`, no constraints from [prototype] are imposed on
+  /// [child].
   const PrototypeConstrainedBox.tight({
     super.key,
+    bool constrain = true,
     required this.prototype,
     required this.child,
-  })  : constrainMinWidth = true,
-        constrainMaxWidth = true,
-        constrainMinHeight = true,
-        constrainMaxHeight = true;
+  })  : constrainMinWidth = constrain,
+        constrainMaxWidth = constrain,
+        constrainMinHeight = constrain,
+        constrainMaxHeight = constrain;
 
   /// Constrains the given [child] to have the exact same size as [prototype].
   const PrototypeConstrainedBox.tightFor({
@@ -44,14 +48,18 @@ final class PrototypeConstrainedBox extends RenderObjectWidget {
         constrainMaxHeight = height;
 
   /// Constrains the given [child] to forbid it to be larger than [prototype].
+  ///
+  /// If [constrain] is `false`, no constraints from [prototype] are imposed on
+  /// [child].
   const PrototypeConstrainedBox.loose({
     super.key,
+    bool constrain = true,
     required this.prototype,
     required this.child,
   })  : constrainMinWidth = false,
-        constrainMaxWidth = true,
+        constrainMaxWidth = constrain,
         constrainMinHeight = false,
-        constrainMaxHeight = true;
+        constrainMaxHeight = constrain;
 
   /// Creates a widget that imposes the [prototype] constraints on its [child].
   ///
@@ -123,218 +131,6 @@ final class PrototypeConstrainedBox extends RenderObjectWidget {
         DiagnosticsProperty<bool>('constrainMinHeight', constrainMinHeight));
     properties.add(
         DiagnosticsProperty<bool>('constrainMaxHeight', constrainMaxHeight));
-  }
-}
-
-final class RenderPrototypeConstrainedBox extends RenderProxyBox {
-  RenderPrototypeConstrainedBox(
-    this._constrainMinWidth,
-    this._constrainMaxWidth,
-    this._constrainMinHeight,
-    this._constrainMaxHeight,
-  );
-
-  bool get constrainMinWidth => _constrainMinWidth;
-  bool _constrainMinWidth;
-
-  set constrainMinWidth(bool value) {
-    if (_constrainMinWidth != value) {
-      _constrainMinWidth = value;
-      markNeedsLayout();
-    }
-  }
-
-  bool get constrainMaxWidth => _constrainMaxWidth;
-  bool _constrainMaxWidth;
-
-  set constrainMaxWidth(bool value) {
-    if (_constrainMaxWidth != value) {
-      _constrainMaxWidth = value;
-      markNeedsLayout();
-    }
-  }
-
-  bool get constrainMinHeight => _constrainMinHeight;
-  bool _constrainMinHeight;
-
-  set constrainMinHeight(bool value) {
-    if (_constrainMinHeight != value) {
-      _constrainMinHeight = value;
-      markNeedsLayout();
-    }
-  }
-
-  bool get constrainMaxHeight => _constrainMaxHeight;
-  bool _constrainMaxHeight;
-
-  set constrainMaxHeight(bool value) {
-    if (_constrainMaxHeight != value) {
-      _constrainMaxHeight = value;
-      markNeedsLayout();
-    }
-  }
-
-  RenderBox? _prototype;
-
-  RenderBox? get prototype => _prototype;
-
-  set prototype(RenderBox? value) {
-    if (_prototype != null) {
-      dropChild(_prototype!);
-    }
-    _prototype = value;
-    if (_prototype != null) {
-      adoptChild(_prototype!);
-    }
-    markNeedsLayout();
-  }
-
-  BoxConstraints? _prototypeConstraints;
-
-  void _computePrototypeConstraints() {
-    final size = prototype!.getDryLayout(constraints);
-
-    _prototypeConstraints = BoxConstraints(
-      minWidth: constrainMinWidth ? size.width : 0.0,
-      maxWidth: constrainMaxWidth ? size.width : double.infinity,
-      minHeight: constrainMinHeight ? size.height : 0.0,
-      maxHeight: constrainMaxHeight ? size.height : double.infinity,
-    );
-  }
-
-  @pragma('vm:prefer-inline')
-  @pragma('wasm:prefer-inline')
-  @pragma('dart2js:tryInline')
-  double _computeIntrinsic({
-    required double extent,
-    required bool constrainMin,
-    required bool constrainMax,
-    required double Function(double extent) computeChildIntrinsic,
-    required double Function(double extent) computePrototypeIntrinsic,
-  }) {
-    final childExtent = computeChildIntrinsic(extent);
-    if (!constrainMin && !constrainMax) return childExtent;
-
-    final prototypeExtent = computePrototypeIntrinsic(extent);
-
-    if (constrainMin && constrainMax) {
-      return prototypeExtent;
-    } else {
-      return constrainMax
-          ? min(childExtent, prototypeExtent)
-          : max(childExtent, prototypeExtent);
-    }
-  }
-
-  @override
-  double computeMinIntrinsicWidth(double height) {
-    return _computeIntrinsic(
-      extent: height,
-      constrainMin: constrainMinWidth,
-      constrainMax: constrainMaxWidth,
-      computeChildIntrinsic: super.computeMinIntrinsicWidth,
-      computePrototypeIntrinsic: prototype!.getMinIntrinsicWidth,
-    );
-  }
-
-  @override
-  double computeMaxIntrinsicWidth(double height) {
-    return _computeIntrinsic(
-      extent: height,
-      constrainMin: constrainMinWidth,
-      constrainMax: constrainMaxWidth,
-      computeChildIntrinsic: super.computeMaxIntrinsicWidth,
-      computePrototypeIntrinsic: prototype!.getMaxIntrinsicWidth,
-    );
-  }
-
-  @override
-  double computeMinIntrinsicHeight(double width) {
-    return _computeIntrinsic(
-      extent: width,
-      constrainMin: constrainMinHeight,
-      constrainMax: constrainMaxHeight,
-      computeChildIntrinsic: super.computeMinIntrinsicHeight,
-      computePrototypeIntrinsic: prototype!.getMinIntrinsicHeight,
-    );
-  }
-
-  @override
-  double computeMaxIntrinsicHeight(double width) {
-    return _computeIntrinsic(
-      extent: width,
-      constrainMin: constrainMinHeight,
-      constrainMax: constrainMaxHeight,
-      computeChildIntrinsic: super.computeMaxIntrinsicHeight,
-      computePrototypeIntrinsic: prototype!.getMaxIntrinsicHeight,
-    );
-  }
-
-  @override
-  void performLayout() {
-    _computePrototypeConstraints();
-
-    final constraints = _prototypeConstraints!;
-
-    if (child case final child?) {
-      child.layout(
-        constraints.enforce(this.constraints),
-        parentUsesSize: true,
-      );
-      size = child.size;
-    } else {
-      size = _prototypeConstraints!.enforce(constraints).constrain(Size.zero);
-    }
-  }
-
-  @override
-  Size computeDryLayout(BoxConstraints constraints) {
-    if (child case final child?) {
-      return child.getDryLayout(
-        _prototypeConstraints!.enforce(constraints),
-      );
-    } else {
-      return _prototypeConstraints!.enforce(constraints).constrain(Size.zero);
-    }
-  }
-
-  @override
-  void attach(PipelineOwner owner) {
-    super.attach(owner);
-    prototype?.attach(owner);
-  }
-
-  @override
-  void detach() {
-    super.detach();
-    prototype?.detach();
-  }
-
-  @override
-  void redepthChildren() {
-    super.redepthChildren();
-    if (prototype case final prototype?) {
-      redepthChild(prototype);
-    }
-  }
-
-  @override
-  void visitChildren(RenderObjectVisitor visitor) {
-    if (child case final child?) {
-      visitor(child);
-    }
-  }
-
-  @override
-  List<DiagnosticsNode> debugDescribeChildren() {
-    return [
-      ...super.debugDescribeChildren(),
-      if (prototype case final prototype?)
-        prototype.toDiagnosticsNode(
-          name: 'prototype',
-          style: DiagnosticsTreeStyle.offstage,
-        ),
-    ];
   }
 }
 
