@@ -35,8 +35,7 @@ void main() {
         );
       });
 
-      testWidgets(
-          'should not constrain the child when constrain is false',
+      testWidgets('should not constrain the child when constrain is false',
           (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
@@ -83,8 +82,7 @@ void main() {
         );
       });
 
-      testWidgets(
-          'should not constrain the child when constrain is false',
+      testWidgets('should not constrain the child when constrain is false',
           (WidgetTester tester) async {
         await _testWidget(
           tester: tester,
@@ -288,6 +286,20 @@ void main() {
         expect(unconstrainedBox.getMaxIntrinsicHeight(double.infinity), 20.0);
         expect(unconstrainedBox.size, const Size(40.0, 20.0));
       });
+    });
+
+    testWidgets(
+        'should treat prototype as offstage when visiting onstage children',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const PrototypeConstrainedBox.tight(
+          prototype: SizedBox.square(dimension: 64.0),
+          child: SizedBox.square(dimension: 32.0),
+        ),
+      );
+
+      expect(find.byType(SizedBox), findsOneWidget);
+      expect(find.byType(SizedBox, skipOffstage: false), findsNWidgets(2));
     });
   });
 }

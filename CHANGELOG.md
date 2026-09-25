@@ -1,3 +1,7 @@
+## 2.0.6
+
+* Override `debugVisitOnstageChildren` in `_PrototypeConstrainedBoxElement` so `prototype` is treated as offstage by onstage element visitors (such as `flutter_test` finders)
+
 ## 2.0.5
 
 * Add `constrain` parameter to `PrototypeConstrainedBox.tight` and `PrototypeConstrainedBox.loose` constructors (defaults to `true`)

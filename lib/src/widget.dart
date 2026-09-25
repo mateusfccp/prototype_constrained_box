@@ -157,6 +157,14 @@ final class _PrototypeConstrainedBoxElement extends RenderObjectElement {
   }
 
   @override
+  void debugVisitOnstageChildren(ElementVisitor visitor) {
+    final child = _child;
+    if (child != null) {
+      visitor(child);
+    }
+  }
+
+  @override
   void forgetChild(Element child) {
     if (child == _child) {
       _child = null;
