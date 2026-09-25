@@ -1,3 +1,8 @@
+## 2.0.4
+
+* Fix null check exception when querying intrinsic dimensions before the first layout
+* Fix `computeMinIntrinsicHeight` and `computeMaxIntrinsicHeight` constraining by width instead of height
+
 ## 2.0.3+1
 
 * Format code and update lint dependencies

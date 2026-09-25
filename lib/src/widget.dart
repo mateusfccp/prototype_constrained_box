@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -200,76 +202,72 @@ final class RenderPrototypeConstrainedBox extends RenderProxyBox {
     );
   }
 
+  @pragma('vm:prefer-inline')
+  @pragma('wasm:prefer-inline')
+  @pragma('dart2js:tryInline')
+  double _computeIntrinsic({
+    required double extent,
+    required bool constrainMin,
+    required bool constrainMax,
+    required double Function(double extent) computeChildIntrinsic,
+    required double Function(double extent) computePrototypeIntrinsic,
+  }) {
+    final childExtent = computeChildIntrinsic(extent);
+    if (!constrainMin && !constrainMax) return childExtent;
+
+    final prototypeExtent = computePrototypeIntrinsic(extent);
+
+    if (constrainMin && constrainMax) {
+      return prototypeExtent;
+    } else {
+      return constrainMax
+          ? min(childExtent, prototypeExtent)
+          : max(childExtent, prototypeExtent);
+    }
+  }
+
   @override
   double computeMinIntrinsicWidth(double height) {
-    final constraints = _prototypeConstraints!;
-    if (constraints.hasBoundedWidth && constraints.hasTightWidth) {
-      return constraints.minWidth;
-    } else {
-      final width = super.computeMinIntrinsicWidth(height);
-
-      assert(width.isFinite);
-
-      if (constraints.hasInfiniteWidth) {
-        return width;
-      } else {
-        return constraints.constrainWidth(width);
-      }
-    }
+    return _computeIntrinsic(
+      extent: height,
+      constrainMin: constrainMinWidth,
+      constrainMax: constrainMaxWidth,
+      computeChildIntrinsic: super.computeMinIntrinsicWidth,
+      computePrototypeIntrinsic: prototype!.getMinIntrinsicWidth,
+    );
   }
 
   @override
   double computeMaxIntrinsicWidth(double height) {
-    final constraints = _prototypeConstraints!;
-    if (constraints.hasBoundedWidth && constraints.hasTightWidth) {
-      return constraints.minWidth;
-    } else {
-      final width = super.computeMaxIntrinsicWidth(height);
-
-      assert(width.isFinite);
-
-      if (constraints.hasInfiniteWidth) {
-        return width;
-      } else {
-        return constraints.constrainWidth(width);
-      }
-    }
+    return _computeIntrinsic(
+      extent: height,
+      constrainMin: constrainMinWidth,
+      constrainMax: constrainMaxWidth,
+      computeChildIntrinsic: super.computeMaxIntrinsicWidth,
+      computePrototypeIntrinsic: prototype!.getMaxIntrinsicWidth,
+    );
   }
 
   @override
   double computeMinIntrinsicHeight(double width) {
-    final constraints = _prototypeConstraints!;
-    if (constraints.hasBoundedHeight && constraints.hasTightHeight) {
-      return constraints.minHeight;
-    } else {
-      final height = super.computeMinIntrinsicHeight(width);
-
-      assert(height.isFinite);
-
-      if (constraints.hasInfiniteHeight) {
-        return height;
-      } else {
-        return constraints.constrainWidth(height);
-      }
-    }
+    return _computeIntrinsic(
+      extent: width,
+      constrainMin: constrainMinHeight,
+      constrainMax: constrainMaxHeight,
+      computeChildIntrinsic: super.computeMinIntrinsicHeight,
+      computePrototypeIntrinsic: prototype!.getMinIntrinsicHeight,
+    );
   }
 
   @override
   double computeMaxIntrinsicHeight(double width) {
-    final constraints = _prototypeConstraints!;
-    if (constraints.hasBoundedHeight && constraints.hasTightHeight) {
-      return constraints.minHeight;
-    } else {
-      final height = super.computeMaxIntrinsicHeight(width);
-
-      assert(height.isFinite);
-
-      if (constraints.hasInfiniteHeight) {
-        return height;
-      } else {
-        return constraints.constrainWidth(height);
-      }
-    }
+    return _computeIntrinsic(
+      extent: width,
+      constrainMin: constrainMinHeight,
+      constrainMax: constrainMaxHeight,
+      computeChildIntrinsic: super.computeMaxIntrinsicHeight,
+      computePrototypeIntrinsic: prototype!.getMaxIntrinsicHeight,
+    );
   }
 
   @override
